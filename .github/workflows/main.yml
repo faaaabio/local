@@ -26,3 +26,12 @@ jobs:
             cd /var/www/html &&
             git pull origin main
           "
+- name: Rodar deploy no servidor
+  run: |
+    ssh -i ~/.ssh/id_ed25519 fsl@100.105.76.50 "
+      echo 'Entrando no diretório...' &&
+      cd /var/www/html &&
+      echo 'Fazendo git pull...' &&
+      git pull origin main &&
+      echo 'Deploy concluído!'
+    "
