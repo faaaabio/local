@@ -1,121 +1,212 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="h-full">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bento Cards</title>
+    <title>Passeios em João Pessoa - Agendamento</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .bento-card {
-            transition: all 0.3s ease;
-            animation: fadeIn 0.5s ease-out forwards;
-            background-color: #1a1a1a;
-            border: 1px solid #2a2a2a;
-            height: 100%;
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            bg: '#1a1a1a',
+                            card: '#2c2c2c',
+                            input: '#333333',
+                            border: '#3a3a3a',
+                        }
+                    }
+                }
+            }
         }
-
-        .bento-card:hover {
-            transform: translateY(-4px);
-            border-color: #4ade80;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    </script>
 </head>
-<body class="bg-gray-950 h-full w-full m-0 p-0">
-    <div class="w-full h-full p-2">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-2 h-full">
-            <!-- Pasta Pública -->
-            <a href="http://100.105.76.50/public/" target="_blank" rel="noopener noreferrer" class="bento-card md:col-span-12 rounded-xl p-6 shadow-lg">
-                <div class="flex items-end space-x-4 h-full">
-                    <div class="bg-emerald-100 p-3 rounded-lg">
-                        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-                        </svg>
+<body class="bg-dark-bg text-gray-200 h-screen w-screen overflow-hidden">
+    <div class="h-full w-full grid grid-cols-3 gap-5 p-5 overflow-y-auto">
+        <div class="col-span-2 flex flex-col gap-4">
+            <!-- Card de Planos -->
+            <div class="bg-dark-card rounded-lg p-5 shadow-lg border border-dark-border">
+                <h2 class="text-lg font-semibold text-white mb-4 pb-2 border-b border-dark-border">Escolha seu Plano</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Plano Personalizado -->
+                    <div onclick="selectPlan(this, 'personalizado', 1799)" class="bg-dark-input border-2 border-dark-border rounded-lg p-4 cursor-pointer transition-all hover:border-blue-500 hover:bg-dark-card">
+                        <h3 class="text-base font-medium text-white mb-2">Plano Personalizado</h3>
+                        <div class="text-xl text-blue-500 mb-2">R$ 1.799</div>
+                        <p class="text-sm text-gray-400 mb-3">por casal</p>
+                        <ul class="text-sm text-gray-400 space-y-2">
+                            <li class="flex items-center">
+                                <span class="text-blue-500 mr-2">✓</span>
+                                2 diárias + tudo do Premium
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-blue-500 mr-2">✓</span>
+                                Roteiro exclusivo
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-blue-500 mr-2">✓</span>
+                                Ideal para experiências especiais
+                            </li>
+                        </ul>
                     </div>
-                    <div class="flex-1">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-lg font-semibold text-gray-200">PASTA PÚBLICA</h3>
-                            <span class="px-2 py-1 text-xs font-medium bg-emerald-100 text-emerald-800 rounded-full">Público</span>
-                        </div>
-                        <p class="text-sm text-gray-400 mt-1">Armazenamento compartilhado para arquivos públicos e documentos da equipe.</p>
-                    </div>
-                </div>
-            </a>
 
-            <!-- Primeira Linha -->
-            <a href="http://100.105.76.50:32400/" target="_blank" rel="noopener noreferrer" class="bento-card md:col-span-8 rounded-xl p-6 shadow-lg">
-                <div class="flex items-end space-x-4 h-full">
-                    <div class="bg-emerald-100 p-3 rounded-lg">
-                        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
-                        </svg>
+                    <!-- Plano Premium -->
+                    <div onclick="selectPlan(this, 'premium', 999)" class="bg-dark-input border-2 border-dark-border rounded-lg p-4 cursor-pointer transition-all hover:border-blue-500 hover:bg-dark-card">
+                        <h3 class="text-base font-medium text-white mb-2">Plano Premium</h3>
+                        <div class="text-xl text-blue-500 mb-2">R$ 999</div>
+                        <p class="text-sm text-gray-400 mb-3">por casal</p>
+                        <ul class="text-sm text-gray-400 space-y-2">
+                            <li class="flex items-center">
+                                <span class="text-blue-500 mr-2">✓</span>
+                                Translado + coolers
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-blue-500 mr-2">✓</span>
+                                Itens combinados
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-blue-500 mr-2">✓</span>
+                                Passeios em pontos turísticos
+                            </li>
+                        </ul>
                     </div>
-                    <div class="flex-1">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-lg font-semibold text-gray-200">PLEX</h3>
-                            <span class="px-2 py-1 text-xs font-medium bg-emerald-100 text-emerald-800 rounded-full">32400</span>
-                        </div>
-                        <p class="text-sm text-gray-400 mt-1">Servidor de mídia para streaming de filmes, séries e músicas com interface amigável.</p>
-                    </div>
-                </div>
-            </a>
 
-            <a href="http://100.105.76.50:8080/" target="_blank" rel="noopener noreferrer" class="bento-card md:col-span-4 rounded-xl p-6 shadow-lg">
-                <div class="flex items-end space-x-4 h-full">
-                    <div class="bg-emerald-100 p-3 rounded-lg">
-                        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                        </svg>
-                    </div>
-                    <div class="flex-1">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-lg font-semibold text-gray-200">NEXTCLOUD</h3>
-                            <span class="px-2 py-1 text-xs font-medium bg-emerald-100 text-emerald-800 rounded-full">8080</span>
-                        </div>
-                        <p class="text-sm text-gray-400 mt-1">Plataforma de armazenamento em nuvem com sincronização e compartilhamento de arquivos.</p>
+                    <!-- Plano Bate-volta -->
+                    <div onclick="selectPlan(this, 'bate-volta', 199)" class="bg-dark-input border-2 border-dark-border rounded-lg p-4 cursor-pointer transition-all hover:border-blue-500 hover:bg-dark-card">
+                        <h3 class="text-base font-medium text-white mb-2">Plano Bate-volta</h3>
+                        <div class="text-xl text-blue-500 mb-2">R$ 199 - 399</div>
+                        <p class="text-sm text-gray-400 mb-3">por pessoa</p>
+                        <ul class="text-sm text-gray-400 space-y-2">
+                            <li class="flex items-center">
+                                <span class="text-blue-500 mr-2">✓</span>
+                                Opções Básico, Médio e Completo
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-blue-500 mr-2">✓</span>
+                                Passeio incluso
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-blue-500 mr-2">✓</span>
+                                Diferentes níveis de inclusão
+                            </li>
+                        </ul>
                     </div>
                 </div>
-            </a>
+            </div>
 
-            <!-- Segunda Linha -->
-            <a href="http://100.105.76.50:3001/dashboard" target="_blank" rel="noopener noreferrer" class="bento-card md:col-span-6 rounded-xl p-6 shadow-lg">
-                <div class="flex items-end space-x-4 h-full">
-                    <div class="bg-emerald-100 p-3 rounded-lg">
-                        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+            <!-- Formulário de Agendamento -->
+            <div class="bg-dark-card rounded-lg p-5 shadow-lg border border-dark-border">
+                <h2 class="text-lg font-semibold text-white mb-4 pb-2 border-b border-dark-border">Informações do Agendamento</h2>
+                <form id="bookingForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-white mb-1">Nome Completo</label>
+                        <input type="text" required class="w-full bg-dark-input border border-dark-border rounded px-3 py-2 text-sm text-white focus:border-blue-500 focus:outline-none">
                     </div>
-                    <div class="flex-1">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-lg font-semibold text-gray-200">KUMA</h3>
-                            <span class="px-2 py-1 text-xs font-medium bg-emerald-100 text-emerald-800 rounded-full">3001</span>
-                        </div>
-                        <p class="text-sm text-gray-400 mt-1">Monitoramento de disponibilidade de serviços com notificações em tempo real.</p>
-                    </div>
-                </div>
-            </a>
 
-            <a href="http://100.105.76.50:7575/manage" target="_blank" rel="noopener noreferrer" class="bento-card md:col-span-6 rounded-xl p-6 shadow-lg">
-                <div class="flex items-end space-x-4 h-full">
-                    <div class="bg-emerald-100 p-3 rounded-lg">
-                        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                        </svg>
+                    <div>
+                        <label class="block text-sm font-medium text-white mb-1">E-mail</label>
+                        <input type="email" required class="w-full bg-dark-input border border-dark-border rounded px-3 py-2 text-sm text-white focus:border-blue-500 focus:outline-none">
                     </div>
-                    <div class="flex-1">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-lg font-semibold text-gray-200">HOMARR</h3>
-                            <span class="px-2 py-1 text-xs font-medium bg-emerald-100 text-emerald-800 rounded-full">7575</span>
-                        </div>
-                        <p class="text-sm text-gray-400 mt-1">Dashboard personalizado para centralizar acesso a todos os serviços e aplicações.</p>
+
+                    <div>
+                        <label class="block text-sm font-medium text-white mb-1">Telefone</label>
+                        <input type="tel" required class="w-full bg-dark-input border border-dark-border rounded px-3 py-2 text-sm text-white focus:border-blue-500 focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-white mb-1">Data Desejada</label>
+                        <input type="date" required class="w-full bg-dark-input border border-dark-border rounded px-3 py-2 text-sm text-white focus:border-blue-500 focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-white mb-1">Número de Pessoas</label>
+                        <input type="number" min="1" required onchange="updateTotal()" class="w-full bg-dark-input border border-dark-border rounded px-3 py-2 text-sm text-white focus:border-blue-500 focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-white mb-1">Mensagem (opcional)</label>
+                        <textarea rows="4" class="w-full bg-dark-input border border-dark-border rounded px-3 py-2 text-sm text-white focus:border-blue-500 focus:outline-none"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Card de Resumo -->
+        <div class="bg-dark-card rounded-lg p-5 shadow-lg border border-dark-border sticky top-5 h-fit">
+            <h2 class="text-lg font-semibold text-white mb-4 pb-2 border-b border-dark-border">Resumo do Agendamento</h2>
+            <div class="space-y-3">
+                <div class="flex justify-between text-sm text-gray-400 pb-3 border-b border-dark-border">
+                    <span>Plano selecionado:</span>
+                    <span id="selectedPlan">Nenhum</span>
+                </div>
+                <div class="flex justify-between text-sm text-gray-400 pb-3 border-b border-dark-border">
+                    <span>Número de pessoas:</span>
+                    <span id="totalGuests">0</span>
+                </div>
+                <div class="flex justify-between text-sm text-gray-400 pb-3 border-b border-dark-border">
+                    <span>Valor por pessoa:</span>
+                    <span id="pricePerPerson">R$ 0,00</span>
+                </div>
+                <div class="pt-3 border-t-2 border-dark-border">
+                    <div class="flex justify-between text-sm font-bold text-white">
+                        <span>Total:</span>
+                        <span id="totalPrice">R$ 0,00</span>
                     </div>
                 </div>
-            </a>
+            </div>
+            <button type="submit" form="bookingForm" class="w-full bg-blue-500 text-white py-2 px-4 rounded mt-4 text-sm hover:bg-blue-600 transition-colors">
+                Finalizar Agendamento
+            </button>
         </div>
     </div>
+
+    <script>
+        let selectedPlanPrice = 0;
+        let selectedPlanName = '';
+
+        function selectPlan(element, planName, price) {
+            document.querySelectorAll('[onclick^="selectPlan"]').forEach(card => {
+                card.classList.remove('border-blue-500', 'bg-dark-card');
+                card.classList.add('border-dark-border');
+            });
+            
+            element.classList.remove('border-dark-border');
+            element.classList.add('border-blue-500', 'bg-dark-card');
+            
+            selectedPlanPrice = price;
+            selectedPlanName = planName;
+            document.getElementById('selectedPlan').textContent = element.querySelector('h3').textContent;
+            
+            updateTotal();
+        }
+
+        function updateTotal() {
+            const guests = parseInt(document.querySelector('input[type="number"]').value) || 0;
+            document.getElementById('totalGuests').textContent = guests;
+            
+            const pricePerPerson = selectedPlanPrice;
+            document.getElementById('pricePerPerson').textContent = `R$ ${pricePerPerson.toFixed(2)}`;
+            
+            const total = pricePerPerson * guests;
+            document.getElementById('totalPrice').textContent = `R$ ${total.toFixed(2)}`;
+        }
+
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (!selectedPlanName) {
+                alert('Por favor, selecione um plano primeiro.');
+                return;
+            }
+            alert('Solicitação enviada com sucesso! Entraremos em contato em breve.');
+            this.reset();
+            document.querySelectorAll('[onclick^="selectPlan"]').forEach(card => {
+                card.classList.remove('border-blue-500', 'bg-dark-card');
+                card.classList.add('border-dark-border');
+            });
+            selectedPlanPrice = 0;
+            selectedPlanName = '';
+            updateTotal();
+        });
+    </script>
 </body>
-</html>
+</html> 
